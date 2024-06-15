@@ -13,18 +13,21 @@
 #' ts_transfo(df, 1994, 06, 4)
 #'
 ts_transfo <- function(DATAFRAME, YEAR, MONTH, FREQUENCY) {
+  if (!is.data.frame(DATAFRAME)) {
+    stop("DATAFRAME doit être un data.frame")
+  }
+  if (!is.numeric(YEAR) || !is.numeric(MONTH) || !is.numeric(FREQUENCY)) {
+    stop("YEAR, MONTH et FREQUENCY doivent être des valeurs numériques")
+  }
 
-  # Initialize the list to store the time-series
+  # Le reste de votre fonction reste inchangé
   ts_list <- list()
-
-  # Loop over each column of the dataframe
   for (i in 1:ncol(DATAFRAME)) {
     col_name <- names(DATAFRAME)[i]
     ts_name <- paste0("ts_", col_name)
     ts_data <- ts(data = DATAFRAME[, col_name], start = c(YEAR, MONTH), frequency = FREQUENCY)
     ts_list[[col_name]] <- ts_data
     assign(ts_name, ts_data, envir = .GlobalEnv)
-
   }
   assign("ts_list", ts_list, envir = .GlobalEnv)
   return(ts_list)
