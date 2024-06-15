@@ -29,3 +29,5 @@ Imports:
     tseries,
     tsoutliers,
     xgboost
+URL: https://github.com/NoaLRX/FastForecast
+BugReports: https://github.com/NoaLRX/FastForecast/issues
