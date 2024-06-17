@@ -15,6 +15,6 @@ created time-series. This function use the combined_test() and seasdum() functio
 from the package seastests.
 }
 \examples{
-ts_transfo()
+seaso_detect()
 
 }

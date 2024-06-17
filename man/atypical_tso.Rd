@@ -14,6 +14,6 @@ This function takes no argument, and will correct your previously created time-s
 and correct any atypical points. This function use the tso() function from the package tsoutliers
 }
 \examples{
-ts_transfo()
+atypical_tso()
 
 }
