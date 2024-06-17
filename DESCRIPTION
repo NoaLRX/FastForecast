@@ -1,7 +1,7 @@
 Package: FastForecast
 Type: Package
 Title: FastForecast aims to provide a fast and accurate forecasting method for time series data.
-Version: 0.1.0
+Version: 1.0.0
 Author: Noa Le Roux
 Maintainer: The package maintainer <yourself@somewhere.net>
 Description: This package takes a dataframe of several time series as input, and can correct for atypical points, seasonality and stationarity. It then generates forecasting models using 6 econometric models and 6 Machine-Learning models. It also allows you to display series graphically, calculate forecast quality indicators and display them in table form as well as graphically.
