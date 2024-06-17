@@ -1,31 +1,38 @@
 
-- [1 FastForecast](#1-fastforecast)
-  - [1.1 Installation](#11-installation)
-    - [1.1.1 Help & Documentation](#111-help--documentation)
-  - [1.2 Functions](#12-functions)
-    - [1.2.1 Time-Series
-      transformation](#121-time-series-transformation)
-    - [1.2.2 Atypical Points
-      Correction](#122-atypical-points-correction)
-    - [1.2.3 Seasonality Detection](#123-seasonality-detection)
-    - [1.2.4 Seasonality Correction](#124-seasonality-correction)
-    - [1.2.5 Seasonality Verification](#125-seasonality-verification)
-    - [1.2.6 Stationarity Treatment](#126-stationarity-treatment)
-    - [1.2.7 Aligning Time-Series
-      length](#127-aligning-time-series-length)
-    - [1.2.8 Creating a dataframe with each
-      time-series](#128-creating-a-dataframe-with-each-time-series)
-    - [1.2.9 Variables Selection](#129-variables-selection)
-    - [1.2.10 Econometrics Forecasting
-      Models](#1210-econometrics-forecasting-models)
-    - [1.2.11 Machine-Learning Forecasting
-      Models](#1211-machine-learning-forecasting-models)
+- [FastForecast](#fastforecast)
+- [Installation](#installation)
+  - [Help & Documentation](#help--documentation)
+- [Functions](#functions)
+  - [Time-Series transformation](#time-series-transformation)
+  - [Atypical Points Correction](#atypical-points-correction)
+  - [Seasonality Detection](#seasonality-detection)
+  - [Seasonality Correction](#seasonality-correction)
+  - [Seasonality Verification](#seasonality-verification)
+  - [Stationarity Treatment](#stationarity-treatment)
+  - [Aligning Time-Series length](#aligning-time-series-length)
+  - [Creating a dataframe with each
+    time-series](#creating-a-dataframe-with-each-time-series)
+  - [Variables Selection](#variables-selection)
+  - [Econometrics Forecasting Models](#econometrics-forecasting-models)
+    - [Machine-Learning Forecasting
+      Models](#machine-learning-forecasting-models)
 
+<style>
+h1 {counter-reset: h2counter;}
+h2 {counter-reset: h3counter;}
+h2:before {
+  counter-increment: h2counter;
+  content: counter(h2counter) ".\0000a0\0000a0";
+}
+h3:before {
+  counter-increment: h3counter;
+  content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
+}
+</style>
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- TOC_PLACEHOLDER -->
 
-$$toc$$
-
-# 1 FastForecast
+# FastForecast
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -39,7 +46,7 @@ It also allows you to display series graphically, calculate forecast
 quality indicators and display them in table form as well as
 graphically.
 
-## 1.1 Installation
+# Installation
 
 You can install the development version of FastForecast from
 [GitHub](https://github.com/) with:
@@ -49,7 +56,7 @@ You can install the development version of FastForecast from
 devtools::install_github("NoaLRX/FastForecast")
 ```
 
-### 1.1.1 Help & Documentation
+## Help & Documentation
 
 ``` r
 help(package="FastForecast")
@@ -58,11 +65,11 @@ help(package="FastForecast")
 ls("package:FastForecast")
 ```
 
-## 1.2 Functions
+# Functions
 
 Here are the different functions that you can use in this package.
 
-### 1.2.1 Time-Series transformation
+## Time-Series transformation
 
 ``` r
 library(FastForecast)
@@ -85,7 +92,7 @@ ts_transfo(land_w, 2013, 01, 4) # Start the 1st January 2013, with quarterly dat
 ts_transfo(land_w, 1996, 05, 12) # Start the 5 May 1996, with monthly data
 ```
 
-### 1.2.2 Atypical Points Correction
+## Atypical Points Correction
 
 This function takes no argument, and will **correct** your previously
 created time-series and correct any atypical points. This function use
@@ -97,7 +104,7 @@ library(tsoutliers)
 atypical_tso()
 ```
 
-### 1.2.3 Seasonality Detection
+## Seasonality Detection
 
 This function takes no argument, and will **detect** any seasonality on
 your previously created time-series. This function use the
@@ -109,7 +116,7 @@ library(seastests)
 seaso_detect()
 ```
 
-### 1.2.4 Seasonality Correction
+## Seasonality Correction
 
 This function takes no argument, and will **correct** any seasonality on
 your previously created time-series. This function use the `stl()`
@@ -121,7 +128,7 @@ library(stats)
 seaso_correct()
 ```
 
-### 1.2.5 Seasonality Verification
+## Seasonality Verification
 
 This function takes no argument, and will **detect** any seasonality on
 your previously created and corrected time-series. This function use the
@@ -136,7 +143,7 @@ library(seastests)
 seaso_verif()
 ```
 
-### 1.2.6 Stationarity Treatment
+## Stationarity Treatment
 
 This function takes no argument, and will **detect** and **correct,** if
 necessary, the time series that are not stationary. The function detect
@@ -153,7 +160,7 @@ stationary, the function will differentiate a second time. If after
 that, the time serie is still not stationary, the function will print a
 message and stop any treatment.
 
-### 1.2.7 Aligning Time-Series length
+## Aligning Time-Series length
 
 This function takes no argument, and will **align** your corrected time
 series that may have different length, because of differentiations.
@@ -162,7 +169,7 @@ series that may have different length, because of differentiations.
 allign_ts()
 ```
 
-### 1.2.8 Creating a dataframe with each time-series
+## Creating a dataframe with each time-series
 
 This function takes one argument, the $Y_t$ variable, the one that
 you’re trying to predict.
@@ -174,7 +181,7 @@ time series as columns, with the $Y_t$ as the first variable.
 create_df("my_Y_variable")
 ```
 
-### 1.2.9 Variables Selection
+## Variables Selection
 
 This function uses two methods of variables selections. The first is the
 ***“BestSubSet”*** method from the
@@ -192,7 +199,7 @@ vselec("my_Y_variable")
 After using the function, you should modify your `results_df` dataframe
 and remove the variables not retained by the two methods.
 
-### 1.2.10 Econometrics Forecasting Models
+## Econometrics Forecasting Models
 
 <u>This function takes three arguments:</u>
 
@@ -233,7 +240,7 @@ eco_models(dataframe, "Gas_Price", 4)
 - GAM model
   ([mgcv](https://www.rdocumentation.org/packages/mgcv/versions/1.9-0))
 
-### 1.2.11 Machine-Learning Forecasting Models
+### Machine-Learning Forecasting Models
 
 <u>This function takes three arguments:</u>
 
