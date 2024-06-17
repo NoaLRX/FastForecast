@@ -3,21 +3,9 @@ output:
   github_document:
     toc: true
     toc_depth: 3
-    number_sections: false
+    number_sections: true
 ---
 
-<style>
-h1 {counter-reset: h2counter;}
-h2 {counter-reset: h3counter;}
-h2:before {
-  counter-increment: h2counter;
-  content: counter(h2counter) ".\0000a0\0000a0";
-}
-h3:before {
-  counter-increment: h3counter;
-  content: counter(h2counter) "." counter(h3counter) ".\0000a0\0000a0";
-}
-</style>
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
