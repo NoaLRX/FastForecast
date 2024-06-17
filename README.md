@@ -25,7 +25,7 @@ You can install the development version of FastForecast from
 devtools::install_github("NoaLRX/FastForecast")
 ```
 
-## Examples
+## Functions
 
 Here are the different functions that you can use in this package.
 
@@ -45,7 +45,7 @@ column in the dataframe.
 To use this function you need to pass a dataframe as the first argument,
 a year, month and frequency as the last argument.
 
-For example:
+<u>For example:</u>
 
 ``` r
 ts_transfo(land_w, 2013, 01, 4) # Start the 1st January 2013, with quarterly data
@@ -161,7 +161,7 @@ and remove the variables not retained by the two methods.
 
 ### Econometrics Forecasting Models
 
-This function takes three arguments:
+<u>This function takes three arguments:</u>
 
 - `DATAFRAME`: Your dataframes with $n$ rows and $p$ columns (with
   $n > p$)
@@ -177,7 +177,7 @@ eco_models(df, "My_Y_Variable", 12)
 eco_models(dataframe, "Gas_Price", 4)
 ```
 
-This function uses the following models and packages:
+<u>This function uses the following models and packages:</u>
 
 - ARX model with gets
   ([gets](https://cran.r-project.org/web/packages/gets/gets.pdf))
@@ -202,7 +202,7 @@ This function uses the following models and packages:
 
 ### Machine-Learning Forecasting Models
 
-This function takes three arguments:
+<u>This function takes three arguments:</u>
 
 - `DATAFRAME`: Your dataframes with $n$ rows and $p$ columns (with
   $n > p$)
@@ -214,7 +214,7 @@ This function takes three arguments:
 ml_models(df, "My_Y_Variable")
 ```
 
-This function uses the following models and packages:
+<u>This function uses the following models and packages:</u>
 
 - MLP models
   ([neuralnet](https://www.rdocumentation.org/packages/neuralnet/versions/1.44.2))

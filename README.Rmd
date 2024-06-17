@@ -30,7 +30,7 @@ You can install the development version of FastForecast from [GitHub](https://gi
 devtools::install_github("NoaLRX/FastForecast")
 ```
 
-## Functions 
+## Functions
 
 Here are the different functions that you can use in this package.
 
