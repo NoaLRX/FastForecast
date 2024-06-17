@@ -16,9 +16,10 @@ knitr::opts_chunk$set(
 # FastForecast
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
-The goal of FastForecast is to provide a fast and accurate forecasting method for time series data.This package takes a dataframe of several time series as input, and can correct for atypical points, seasonality and stationarity. It then generates forecasting models using 6 econometric models and 6 Machine-Learning models. It also allows you to display series graphically, calculate forecast quality indicators and display them in table form as well as graphically.
+The goal of FastForecast is to provide a fast and accurate forecasting method for time series data. This package takes a **dataframe** of several time series as input, and can correct for **atypical points**, **seasonality** and **stationarity**. It then generates forecasting models using **6 econometric models** and **6 Machine-Learning models**. It also allows you to display series graphically, calculate forecast quality indicators and display them in table form as well as graphically.
 
 ## Installation
 
@@ -29,27 +30,162 @@ You can install the development version of FastForecast from [GitHub](https://gi
 devtools::install_github("NoaLRX/FastForecast")
 ```
 
-## Example
+## Functions 
 
-This is a basic example which shows you how to solve a common problem:
+Here are the different functions that you can use in this package.
 
-```{r example}
+### Time-Series transformation
+
+```{r, eval=FALSE}
 library(FastForecast)
-## basic example code
+ts_transfo <- function(DATAFRAME, YEAR, MONTH, FREQUENCY)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+This function transforms the $n$ columns of a dataframe into $n$ individuals Time Series.
 
-```{r cars}
-summary(cars)
+Each time series will take the name `"ts_"` followed by the name of the column in the dataframe.
+
+To use this function you need to pass a dataframe as the first argument, a year, month and frequency as the last argument.
+
+[For example:]{.underline}
+
+```{r, eval=FALSE}
+ts_transfo(land_w, 2013, 01, 4) # Start the 1st January 2013, with quarterly data
+ts_transfo(land_w, 1996, 05, 12) # Start the 5 May 1996, with monthly data
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
+### Atypical Points Correction
 
-You can also embed plots, for example:
+This function takes no argument, and will **correct** your previously created time-series and correct any atypical points. This function use the `tso()` function from the package [tsoutliers](https://www.rdocumentation.org/packages/tsoutliers/versions/0.6-8/topics/tso).
 
-```{r pressure, echo = FALSE}
-plot(pressure)
+```{r, eval=FALSE}
+library(tsoutliers)
+atypical_tso()
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+### Seasonality Detection
+
+This function takes no argument, and will **detect** any seasonality on your previously created time-series. This function use the `combined_test()` and `seasdum()` functions from the package [seastests](https://www.rdocumentation.org/packages/seastests/versions/0.15.4).
+
+```{r, eval=FALSE}
+library(seastests)
+seaso_detect()
+```
+
+### Seasonality Correction
+
+This function takes no argument, and will **correct** any seasonality on your previously created time-series. This function use the `stl()` function from the package [stats](https://www.rdocumentation.org/packages/stats/versions/3.6.2/topics/stl).
+
+```{r, eval=FALSE}
+library(stats)
+seaso_correct()
+```
+
+### Seasonality Verification
+
+This function takes no argument, and will **detect** any seasonality on your previously created and corrected time-series. This function use the `combined_test()` and `seasdum()` functions from the package [seastests](https://www.rdocumentation.org/packages/seastests/versions/0.15.4).
+
+The main purpose of this function is to ensure that there is no seasonality in the corrected series.
+
+```{r, eval=FALSE}
+library(seastests)
+seaso_verif()
+```
+
+### Stationarity Treatment
+
+This function takes no argument, and will **detect** and **correct,** if necessary, the time series that are not stationary. The function detect stationarity with the `adf.test()` function from the package [tseries](https://www.rdocumentation.org/packages/tseries/versions/0.10-54/topics/adf.test).
+
+```{r, eval=FALSE}
+library(tseries)
+statio()
+```
+
+If after a first differentiation, the time-serie is still not stationary, the function will differentiate a second time. If after that, the time serie is still not stationary, the function will print a message and stop any treatment.
+
+### Aligning Time-Series length
+
+This function takes no argument, and will **align** your corrected time series that may have different length, because of differentiations.
+
+```{r, eval=FALSE}
+allign_ts()
+```
+
+### Creating a dataframe with each time-series
+
+This function takes one argument, the $Y_t$ variable, the one that you're trying to predict.
+
+This function will create a single data frame `results_df` with each time series as columns, with the $Y_t$ as the first variable.
+
+```{r, eval=FALSE}
+create_df("my_Y_variable")
+```
+
+### Variables Selection
+
+This function uses two methods of variables selections. The first is the ***"BestSubSet"*** method from the [leaps](https://cran.r-project.org/web/packages/leaps/leaps.pdf) package. The second is the ***"Gets"*** method from the [gets](https://cran.r-project.org/web/packages/gets/gets.pdf) package.
+
+This function takes one argument, the $Y_t$ variable, the one that you're trying to predict.
+
+```{r, eval=FALSE}
+vselec("my_Y_variable")
+```
+
+After using the function, you should modify your `results_df` dataframe and remove the variables not retained by the two methods.
+
+### Econometrics Forecasting Models
+
+[This function takes three arguments:]{.underline}
+
+-   `DATAFRAME`: Your dataframes with $n$ rows and $p$ columns (with $n > p$)
+
+-   `Y_VARIABLE`: Your $Y_t$ variable, meaning the variable you're trying to predict.
+
+-   `PERIOD`: The frequency of your time-series *(12 for monthly, 4 for quarterly...)*
+
+```{r, eval=FALSE}
+eco_models(df, "My_Y_Variable", 12)
+eco_models(dataframe, "Gas_Price", 4)
+```
+
+[This function uses the following models and packages:]{.underline}
+
+-   ARX model with gets ([gets](https://cran.r-project.org/web/packages/gets/gets.pdf))
+
+-   ARX moddel with auto.arima ([forecast](https://www.rdocumentation.org/packages/forecast/versions/8.21.1))
+
+-   ARMAX model with auto.arima ([forecast](https://www.rdocumentation.org/packages/forecast/versions/8.21.1))
+
+-   Naive model ([forecast](https://www.rdocumentation.org/packages/forecast/versions/8.21.1))
+
+-   LM model ([stats](https://www.rdocumentation.org/packages/stats/versions/3.6.2))
+
+-   AR1 mode ([forecast](https://www.rdocumentation.org/packages/forecast/versions/8.21.1))
+
+-   GAM model ([mgcv](https://www.rdocumentation.org/packages/mgcv/versions/1.9-0))
+
+### Machine-Learning Forecasting Models
+
+[This function takes three arguments:]{.underline}
+
+-   `DATAFRAME`: Your dataframes with $n$ rows and $p$ columns (with $n > p$)
+
+-   `Y_VARIABLE`: Your $Y_t$ variable, meaning the variable you're trying to predict.
+
+```{r, eval=FALSE}
+ml_models(df, "My_Y_Variable")
+```
+
+[This function uses the following models and packages:]{.underline}
+
+-   MLP models ([neuralnet](https://www.rdocumentation.org/packages/neuralnet/versions/1.44.2))
+
+-   MARS model ([earth](https://www.rdocumentation.org/packages/earth/versions/5.3.2))
+
+-   SVM model ([e1071](https://www.rdocumentation.org/packages/e1071/versions/1.1-3))
+
+-   Random Forest ([randomForest](https://www.rdocumentation.org/packages/randomForest/versions/4.7-1.1))
+
+-   XGB Boost ([xgboost](https://www.rdocumentation.org/packages/xgboost/versions/1.7.5.1))
+
+-   kNN ([caret](https://www.rdocumentation.org/packages/caret/versions/6.0-94))
