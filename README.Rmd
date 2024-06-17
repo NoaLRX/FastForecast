@@ -1,17 +1,14 @@
 ---
-output: github_document
+output: 
+  github_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
+[toc]
 
 # FastForecast
 
@@ -28,6 +25,15 @@ You can install the development version of FastForecast from [GitHub](https://gi
 ``` r
 # install.packages("devtools")
 devtools::install_github("NoaLRX/FastForecast")
+```
+
+### Help & Documentation
+
+```{r, eval=FALSE}
+help(package="FastForecast")
+
+# Get the list of functions available from the package
+ls("package:FastForecast")
 ```
 
 ## Functions

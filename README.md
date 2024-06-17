@@ -1,7 +1,31 @@
 
+- [1 FastForecast](#1-fastforecast)
+  - [1.1 Installation](#11-installation)
+    - [1.1.1 Help & Documentation](#111-help--documentation)
+  - [1.2 Functions](#12-functions)
+    - [1.2.1 Time-Series
+      transformation](#121-time-series-transformation)
+    - [1.2.2 Atypical Points
+      Correction](#122-atypical-points-correction)
+    - [1.2.3 Seasonality Detection](#123-seasonality-detection)
+    - [1.2.4 Seasonality Correction](#124-seasonality-correction)
+    - [1.2.5 Seasonality Verification](#125-seasonality-verification)
+    - [1.2.6 Stationarity Treatment](#126-stationarity-treatment)
+    - [1.2.7 Aligning Time-Series
+      length](#127-aligning-time-series-length)
+    - [1.2.8 Creating a dataframe with each
+      time-series](#128-creating-a-dataframe-with-each-time-series)
+    - [1.2.9 Variables Selection](#129-variables-selection)
+    - [1.2.10 Econometrics Forecasting
+      Models](#1210-econometrics-forecasting-models)
+    - [1.2.11 Machine-Learning Forecasting
+      Models](#1211-machine-learning-forecasting-models)
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# FastForecast
+$$toc$$
+
+# 1 FastForecast
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -15,7 +39,7 @@ It also allows you to display series graphically, calculate forecast
 quality indicators and display them in table form as well as
 graphically.
 
-## Installation
+## 1.1 Installation
 
 You can install the development version of FastForecast from
 [GitHub](https://github.com/) with:
@@ -25,11 +49,20 @@ You can install the development version of FastForecast from
 devtools::install_github("NoaLRX/FastForecast")
 ```
 
-## Functions
+### 1.1.1 Help & Documentation
+
+``` r
+help(package="FastForecast")
+
+# Get the list of functions available from the package
+ls("package:FastForecast")
+```
+
+## 1.2 Functions
 
 Here are the different functions that you can use in this package.
 
-### Time-Series transformation
+### 1.2.1 Time-Series transformation
 
 ``` r
 library(FastForecast)
@@ -52,7 +85,7 @@ ts_transfo(land_w, 2013, 01, 4) # Start the 1st January 2013, with quarterly dat
 ts_transfo(land_w, 1996, 05, 12) # Start the 5 May 1996, with monthly data
 ```
 
-### Atypical Points Correction
+### 1.2.2 Atypical Points Correction
 
 This function takes no argument, and will **correct** your previously
 created time-series and correct any atypical points. This function use
@@ -64,7 +97,7 @@ library(tsoutliers)
 atypical_tso()
 ```
 
-### Seasonality Detection
+### 1.2.3 Seasonality Detection
 
 This function takes no argument, and will **detect** any seasonality on
 your previously created time-series. This function use the
@@ -76,7 +109,7 @@ library(seastests)
 seaso_detect()
 ```
 
-### Seasonality Correction
+### 1.2.4 Seasonality Correction
 
 This function takes no argument, and will **correct** any seasonality on
 your previously created time-series. This function use the `stl()`
@@ -88,7 +121,7 @@ library(stats)
 seaso_correct()
 ```
 
-### Seasonality Verification
+### 1.2.5 Seasonality Verification
 
 This function takes no argument, and will **detect** any seasonality on
 your previously created and corrected time-series. This function use the
@@ -103,7 +136,7 @@ library(seastests)
 seaso_verif()
 ```
 
-### Stationarity Treatment
+### 1.2.6 Stationarity Treatment
 
 This function takes no argument, and will **detect** and **correct,** if
 necessary, the time series that are not stationary. The function detect
@@ -120,7 +153,7 @@ stationary, the function will differentiate a second time. If after
 that, the time serie is still not stationary, the function will print a
 message and stop any treatment.
 
-### Aligning Time-Series length
+### 1.2.7 Aligning Time-Series length
 
 This function takes no argument, and will **align** your corrected time
 series that may have different length, because of differentiations.
@@ -129,7 +162,7 @@ series that may have different length, because of differentiations.
 allign_ts()
 ```
 
-### Creating a dataframe with each time-series
+### 1.2.8 Creating a dataframe with each time-series
 
 This function takes one argument, the $Y_t$ variable, the one that
 you’re trying to predict.
@@ -141,7 +174,7 @@ time series as columns, with the $Y_t$ as the first variable.
 create_df("my_Y_variable")
 ```
 
-### Variables Selection
+### 1.2.9 Variables Selection
 
 This function uses two methods of variables selections. The first is the
 ***“BestSubSet”*** method from the
@@ -159,7 +192,7 @@ vselec("my_Y_variable")
 After using the function, you should modify your `results_df` dataframe
 and remove the variables not retained by the two methods.
 
-### Econometrics Forecasting Models
+### 1.2.10 Econometrics Forecasting Models
 
 <u>This function takes three arguments:</u>
 
@@ -200,7 +233,7 @@ eco_models(dataframe, "Gas_Price", 4)
 - GAM model
   ([mgcv](https://www.rdocumentation.org/packages/mgcv/versions/1.9-0))
 
-### Machine-Learning Forecasting Models
+### 1.2.11 Machine-Learning Forecasting Models
 
 <u>This function takes three arguments:</u>
 
