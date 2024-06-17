@@ -6,12 +6,11 @@ output:
     number_sections: true
 ---
 
-
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <!-- TOC_PLACEHOLDER -->
 
-# FastForecast {-}
+# FastForecast {.unnumbered}
 
 <!-- badges: start -->
 
@@ -19,7 +18,7 @@ output:
 
 The goal of FastForecast is to provide a fast and accurate forecasting method for time series data. This package takes a **dataframe** of several time series as input, and can correct for **atypical points**, **seasonality** and **stationarity**. It then generates forecasting models using **6 econometric models** and **6 Machine-Learning models**. It also allows you to display series graphically, calculate forecast quality indicators and display them in table form as well as graphically.
 
-# Installation 
+# Installation
 
 You can install the development version of FastForecast from [GitHub](https://github.com/) with:
 
@@ -171,7 +170,7 @@ eco_models(dataframe, "Gas_Price", 4)
 
 -   GAM model ([mgcv](https://www.rdocumentation.org/packages/mgcv/versions/1.9-0))
 
-### Machine-Learning Forecasting Models
+## Machine-Learning Forecasting Models
 
 [This function takes three arguments:]{.underline}
 

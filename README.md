@@ -15,8 +15,8 @@
   - [2.9 Variables Selection](#29-variables-selection)
   - [2.10 Econometrics Forecasting
     Models](#210-econometrics-forecasting-models)
-    - [2.10.1 Machine-Learning Forecasting
-      Models](#2101-machine-learning-forecasting-models)
+  - [2.11 Machine-Learning Forecasting
+    Models](#211-machine-learning-forecasting-models)
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- TOC_PLACEHOLDER -->
@@ -229,7 +229,7 @@ eco_models(dataframe, "Gas_Price", 4)
 - GAM model
   ([mgcv](https://www.rdocumentation.org/packages/mgcv/versions/1.9-0))
 
-### 2.10.1 Machine-Learning Forecasting Models
+## 2.11 Machine-Learning Forecasting Models
 
 <u>This function takes three arguments:</u>
 
